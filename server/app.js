@@ -74,15 +74,17 @@ app.post('/data', function(req,res){
 });
 
 app.delete('/data', function(req,res){
-    client.query("DELETE FROM people (name, location, age, spirit_animal, address) VALUES ($1, $2, $3, $4, $5) RETURNING id",
-        function(err, result) {
-        if(err) {
-            console.log("Error inserting data: ", err);
-            res.send(false);
-        }
+    pg.connect(connectionString, function (err, client) {
+        client.query("DELETE FROM people WHERE id = ($1)", [req.body.id],
+            function (err, result) {
+                if (err) {
+                    console.log("Error inserting data: ", err);
+                    res.send(false);
+                }
 
-        res.send(true);
+                res.send(true);
 
+            })
     })
 
 });

@@ -64,7 +64,6 @@ function deletePerson(){
 
 function updateDOM(data){
    $("#peopleContainer").empty();
-
    for(var i = 0; i < data.length; i++){
       var el = "<div class='well col-md-3'>" +
                   "<p>" + data[i].name + "</p>" +
